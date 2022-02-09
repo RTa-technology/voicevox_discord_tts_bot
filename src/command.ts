@@ -139,5 +139,30 @@ export function createCommandList(
         }
       },
     },
+    {
+      name: 'vadd',
+      description:
+          '辞書を登録できます。削除する場合はvdelコマンドを使用してください。',
+      options: [
+        {
+          name: 'words',
+          type: 'STRING' as const,
+          description: '登録する単語を入力してください。',
+          required: true,
+        },
+        {
+          name: 'pronunciation',
+          type: 'STRING' as const,
+          description: '登録する読み方を入力してください。',
+          required: true,
+        },
+      ],
+      async execute(interaction, connectionManager) {
+        if (connectionManager === false) return
+        const words = interaction.options.get('words')?.value
+        const pronunciation = interaction.options.get('pronunciation')?.value
+
+      },
+    },
   ]
 }
