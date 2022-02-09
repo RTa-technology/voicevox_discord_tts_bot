@@ -19,7 +19,7 @@ import Engine from 'node-voicevox-engine'
 import GuildSetting from '@/model/guildSetting'
 import Client from '@/src/client'
 import ConnectionManager from '@/src/connectionManager'
-import { sendReply, sleep } from '@/src/util'
+import {sendReply, sleep} from '@/src/util'
 
 export const speakerList: ApplicationCommandOptionChoice[] = [
   {
@@ -98,11 +98,11 @@ export default class TextToSpeechBot extends EventEmitter {
       embed.addField(
         'ライセンス事項',
         '本BotのTTS機能は、ヒホ氏によって公開されている音声合成アプリケーションVOICEVOXの音声合成エンジンを利用しています。' +
-          'YouTubeでのライブ配信等の際にこのBotを利用する場合は「VOICEVOX:四国めたん」や「VOICEVOX:ずんだもん」などの表記が必要となりますのでご注意ください。' +
-          'また、TTSにおける文字列の解析等において、MeCab、NAIST Japanese Dictionary及びそれらを内包するOpenJTalkを用いています。'
+        'YouTubeでのライブ配信等の際にこのBotを利用する場合は「VOICEVOX:四国めたん」や「VOICEVOX:ずんだもん」などの表記が必要となりますのでご注意ください。' +
+        'また、TTSにおける文字列の解析等において、MeCab、NAIST Japanese Dictionary及びそれらを内包するOpenJTalkを用いています。'
       )
     }
-    await sendReply(interaction, { embeds: [embed] })
+    await sendReply(interaction, {embeds: [embed]})
   }
 
   async messageCatcher(message: Message): Promise<void> {
@@ -144,7 +144,7 @@ export default class TextToSpeechBot extends EventEmitter {
         await this.sendEmbed(interaction, 'TTS機能を起動しました')
 
         const guildSetting = await GuildSetting.findOne({
-          where: { guildId },
+          where: {guildId},
         })
         const dbFound = !!guildSetting
         let volume = this.defaultVolume
@@ -247,10 +247,10 @@ export default class TextToSpeechBot extends EventEmitter {
     if (connectionManager.resource) {
       connectionManager.resource.volume?.setVolume(connectionManager.volume)
     }
-    const values = { volume: volume / 100 }
+    const values = {volume: volume / 100}
     if (connectionManager.dbFound) {
       await GuildSetting.update(values, {
-        where: { guildId: connectionManager.connection.joinConfig.guildId },
+        where: {guildId: connectionManager.connection.joinConfig.guildId},
       })
     } else {
       await GuildSetting.create({
@@ -304,10 +304,10 @@ export default class TextToSpeechBot extends EventEmitter {
     }
 
     connectionManager.speakerId = speakerId
-    const values = { speakerId }
+    const values = {speakerId}
     if (connectionManager.dbFound) {
       await GuildSetting.update(values, {
-        where: { guildId: connectionManager.connection.joinConfig.guildId },
+        where: {guildId: connectionManager.connection.joinConfig.guildId},
       })
     } else {
       await GuildSetting.create({
@@ -369,10 +369,10 @@ export default class TextToSpeechBot extends EventEmitter {
     }
 
     connectionManager.name = name
-    const values = { name }
+    const values = {name}
     if (connectionManager.dbFound) {
       await GuildSetting.update(values, {
-        where: { guildId: connectionManager.connection.joinConfig.guildId },
+        where: {guildId: connectionManager.connection.joinConfig.guildId},
       })
     } else {
       await GuildSetting.create({
@@ -411,4 +411,5 @@ export default class TextToSpeechBot extends EventEmitter {
       false
     )
   }
+
 }
