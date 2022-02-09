@@ -133,6 +133,9 @@ export default class ConnectionManager {
 
   async readText(message?: Message): Promise<void> {
     if (message) {
+      if (message.content.startsWith(".")){ //読み上げさせない
+        return
+      }
       let containAttachment: string = ''
       if (message.attachments.size) {
         for (const [_, attachment] of message.attachments) {
